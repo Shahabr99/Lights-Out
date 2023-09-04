@@ -32,16 +32,16 @@ function Board({ nrows = 4, ncols = 4, chanceLightStartsOn= 0.25 }) {
 
   /** create a board nrows high/ncols wide, each cell randomly lit or unlit */
   function createBoard() {
-    return Array.from({length: nrows}).map(row => Array.from({length: ncols})).map(
+    return Array.from({length: nrows}).map(row => Array.from({length: ncols}).map(
       cell => Math.random() < chanceLightStartsOn
+    )
     )
   }
 
+
   // Checks all the rows to see if all the lights are off.
   function hasWon() {
-    initialBoard.map(row => 
-      row.map(cell => cell === 't' ? true:false)
-    )
+    return board.every(row => row.every(cell => !cell))
   }
 
   function flipCellsAround(coord) {
@@ -99,7 +99,7 @@ function Board({ nrows = 4, ncols = 4, chanceLightStartsOn= 0.25 }) {
         <tbody>{tblBoard}</tbody>
       </table>
   );
-  }
 }
+
 
 export default Board;
